@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% from 'bootstrap5/form.html' import render_form %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-4">
+        <h1>Log In</h1>
+            {{ render_form(form) }}
+        <br>
+        <p>New User? <a href="{{ url_for('auth.signUp') }}">Click to Sign Up</a></p>
+        <p>
+            Forgot Your Password?
+            <a href="{{ url_for('auth.reset_password_request') }}">Click to Reset It</a>
+        </p>
+    </div>
+</div>
+{% endblock %}

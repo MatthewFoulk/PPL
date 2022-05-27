@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        {% block head %}
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <title>Lifted</title>
+        <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
+
+        {% block styles %}
+            <!-- Bootstrap CSS -->
+            {{ bootstrap.load_css() }}
+        {% endblock %}
+
+        <title>Your page title</title>
+        {% endblock %}
+    </head>
+    <body>
+        <!-- Navigation bar -->
+        {% block navbar %}
+        <nav class="navbar navbar-expand-md navbar-dark bg-primary">
+            <div class="container-fluid">
+                <a class="navbar-brand abs" href="\">Lifted</a>
+                <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#collapseNavbar">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse" id="collapseNavbar">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <div class="dropdown">
+                                <button class="btn btn-secondary dropdown-toggle me-2" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Workout
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                    <li><a class="dropdown-item" href="#">Start Next Workout</a></li>
+                                    <li><a class="dropdown-item" href="#">Build New Workout</a></li>
+                                    <li><a class="dropdown-item" href="#">Your Workouts</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        {% if current_user.is_authenticated %}
+                            <li class="nav-item">
+                                    <div class="dropdown">
+                                        <button class="btn btn-secondary dropdown-toggle me-4" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                            Account
+                                        </button>
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                            <li><a class="dropdown-item" href="{{ url_for('main.user', username=current_user.username) }}">View Profile</a></li>
+                                            <li><div class="dropdown-divider"></div></li>
+                                            <li><a class="dropdown-item" href="/logout">Log Out</a></li>
+                                        </ul>
+                                    </div>
+                            </li> 
+                        {% else %}
+                        <li class="nav-item">
+                            <a role="button" class="btn btn-outline-dark" aria-expanded="false" href="/login">Log In</a>
+                        </li>
+                        <li class="nav-item">
+                            <a role="button" class="btn btn-outline-light ms-2" href="/signup">Sign Up</a>
+                        </li>  
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        {% endblock %}
+
+        <!-- Your page content -->
+        {% block content %} {% endblock %}
+
+        {% block scripts %}
+            <!-- Optional JavaScript -->
+            {{ bootstrap.load_js() }}
+        {% endblock %}
+    </body>
+</html>
